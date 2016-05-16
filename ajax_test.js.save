@@ -1,0 +1,30 @@
+var http = require('http'),
+    fileSystem = require('fs');
+//    path = require('path');
+
+var server = http.createServer(function(request, response) {
+    //var filePath = path.join('ajax_test.html');
+
+//   console.log(request.headers)
+ajax_test.html
+    var filePath = 'someJSON.json';
+
+//    var stat = fileSystem.statSync(filePath);
+
+var stat = fileSystem.readFileSync(filePath);
+
+    response.writeHead(200, {
+       // 'Content-Type': 'application/json',
+'Content-Type': 'text/json',
+'Access-Control-Allow-Origin': '*'
+//        'Content-Length': stat.length
+        });
+response.write(stat);
+
+response.end();
+
+//    var readStream = fileSystem.createReadStream(filePath);
+
+// We replaced all the event handlers with a simple call to readS$
+//    console.log(response.headers);
+//    readStream.pipe(response);

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="js.js" type="text/javascript"></script>
+    <script>
+        var xmlhttp; // ta zmienna musi byc poza funkcja zeby poxniej
+                     // dzialalo przy wywolaniu w funkcji callback
+        function loadXMLDoc(url,callback)
+        {
+            if (window.XMLHttpRequest)
+            {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else
+            {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=callback;
+
+
+            xmlhttp.open("GET",url/*response text*/,true);
+            xmlhttp.send(); // tyego sie uzywa tylko przy metodzie "POST"
+        }
+
+        function f1(){
+            loadXMLDoc('sample_xml.txt',function(){
+                if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                {
+                    document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+
+                }
+                //else {alert("cos nie funguje jego psia madafa")}
+            })
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <!--<style>
+        div {color:red;}
+    </style>-->
+</head>
+<body onload="myOtherFunction()">
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="f1(),myFunction()">Change Content</button>
+<!--<button onclick="myFunction()">Try it</button>-->
+
+</body>
+</html>
+
